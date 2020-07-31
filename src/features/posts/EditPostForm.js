@@ -37,6 +37,7 @@ export const EditPostForm = ({match}) => {
                     name="postTitle"
                     value={title}
                     onChange={onTitleChange}
+                    autoComplete="off"
                 />
                 <label htmlFor="postContent">Post content:</label>
                 <textarea
@@ -45,6 +46,7 @@ export const EditPostForm = ({match}) => {
                     name="postContent"
                     value={content}
                     onChange={onContentChange}
+                    autoComplete="off"
                 />
                 <button type="button" onClick={onSavePostClicked}>
                     Save post

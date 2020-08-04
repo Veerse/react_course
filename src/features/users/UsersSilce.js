@@ -1,20 +1,24 @@
-import {createSlice} from '@reduxjs/toolkit'
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
+import { client } from '../../api/client'
 
 const initialState = [
-    {id: '1', name: 'Nassim Abdelqader'},
-    {id: '2', name: 'Sasuke Uchiwa'},
-    {id: '3', name: 'Itachi Uchiwa'},
-    {id: '4', name: 'Jiraya'},
-    {id: '5', name: 'Rock Lee'},
-    {id: '6', name: 'Gai Maito'},
-    {id: '7', name: 'Naruto Uzumaki'}
+    //{lastName: "ok", firstName: "fn", username:" ab", name:"aze", id:"sd"}
 ]
+
+export const fetchUsers = createAsyncThunk ('users/fetchUsers', async() => {
+    const response = await client.get('fakeApi/users')
+    return response.users
+})
 
 const UsersSlice = createSlice({
     name: 'users',
     initialState: initialState,
-    reducers: {
-
+    reducers: {},
+    extraReducers: {
+        [fetchUsers.fulfilled]: (state, action) => {
+            //state = state.concat(action.payload)
+            return action.payload
+        }
     }
 })
 
